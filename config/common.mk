@@ -210,6 +210,13 @@ $(call inherit-product, vendor/aniosp/config/common_telephony.mk)
 # GApps
 $(call inherit-product, vendor/gapps/config.mk)
 
+# Enable Google Play system updates support
+PRODUCT_SOONG_NAMESPACES += \
+    vendor/aniosp/apex
+
+PRODUCT_PACKAGES += \
+    ModuleMetadataGooglePrebuilt
+
 # OTA
 $(call inherit-product, vendor/aniosp/config/ota.mk)
 
