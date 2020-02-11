@@ -151,10 +151,6 @@ PRODUCT_PRODUCT_PROPERTIES += \
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.storage_manager.show_opt_in=false
 
-# OPA configuration
-PRODUCT_PRODUCT_PROPERTIES += \
-    ro.opa.eligible_device=true
-
 # Google legal
 PRODUCT_PRODUCT_PROPERTIES += \
     ro.url.legal=http://www.google.com/intl/%s/mobile/android/basic/phone-legal.html \
@@ -207,6 +203,9 @@ $(call inherit-product, vendor/aniosp/config/bootanimation.mk)
 
 # Fonts
 $(call inherit-product, vendor/aniosp/config/fonts.mk)
+
+# Inherit from CarrierSettings
+$(call inherit-product, vendor/aniosp/config/common_telephony.mk)
 
 # GApps
 $(call inherit-product, vendor/gapps/config.mk)
