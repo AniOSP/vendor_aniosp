@@ -107,6 +107,10 @@ PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
 PRODUCT_PACKAGE_OVERLAYS += \
     vendor/aniosp/overlay/common
 
+# Cutout control overlay
+PRODUCT_PACKAGES += \
+    NoCutoutOverlay
+
 # TouchGestures
 PRODUCT_PACKAGES += \
     TouchGestures
