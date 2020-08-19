@@ -215,7 +215,7 @@ PRODUCT_SOONG_NAMESPACES += \
     vendor/aniosp/apex
 
 PRODUCT_PACKAGES += \
-    ModuleMetadataGooglePrebuilt
+    ModuleMetadataGoogle
 
 # OTA
 $(call inherit-product, vendor/aniosp/config/ota.mk)
