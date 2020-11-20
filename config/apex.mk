@@ -13,12 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# Overlays
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
-    vendor/aniosp/apex/overlay
+ifeq ($(TARGET_FLATTEN_APEX),false)
 
-DEVICE_PACKAGE_OVERLAYS += \
-    vendor/aniosp/apex/overlay/common
+# Overlay
+PRODUCT_PACKAGES += \
+    ApexOverlay
 
 # Networkstack certificate
 PRODUCT_MAINLINE_SEPOLICY_DEV_CERTIFICATES := vendor/aniosp/apex/NetworkStack
@@ -49,7 +48,6 @@ PRODUCT_PACKAGES += \
     com.google.android.mediaprovider \
     com.google.android.neuralnetworks \
     com.google.android.os.statsd \
-    com.google.android.permission \
     com.google.android.resolv \
     com.google.android.scheduling \
     com.google.android.sdkext \
@@ -58,3 +56,5 @@ PRODUCT_PACKAGES += \
     com.google.android.tzdata3 \
     com.google.android.wifi \
     com.google.mainline.primary.libs
+
+endif

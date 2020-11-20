@@ -214,16 +214,7 @@ $(call inherit-product, vendor/gapps/config.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 
 # Inherit from apex config
-ifeq ($(TARGET_FLATTEN_APEX),false)
 $(call inherit-product, vendor/aniosp/config/apex.mk)
-else
-# Hide "Google Play System Updates" if Apex disabled
-PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
-    vendor/aniosp/overlay_apex_disabled
-
-DEVICE_PACKAGE_OVERLAYS += \
-    vendor/aniosp/overlay_apex_disabled/common
-endif
 
 # OTA
 $(call inherit-product, vendor/aniosp/config/ota.mk)
