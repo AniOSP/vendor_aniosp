@@ -213,7 +213,6 @@ $(call inherit-product, vendor/gapps/config.mk)
 # Inherit from apex config
 ifeq ($(TARGET_FLATTEN_APEX),false)
 $(call inherit-product, vendor/aniosp/config/apex.mk)
-$(call inherit-product, vendor/aniosp/config/system_sepolicy.mk)
 else
 # Hide "Google Play System Updates" if Apex disabled
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
