@@ -27,6 +27,7 @@ $(OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
 	@echo "aniosp: $@"
 	    $(OTA_FROM_TARGET_FILES) --verbose \
 	    --block \
+	    --backup=true \
 	    -p $(OUT_DIR)/host/linux-x86 \
 	    $(BUILT_TARGET_FILES_PACKAGE) $@
 
@@ -67,6 +68,7 @@ $(PROD_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
 	@echo "aniosp production: $@"
 	    $(OTA_FROM_TARGET_FILES) --verbose \
 	    --block \
+	    --backup=true \
 	    -p $(OUT_DIR)/host/linux-x86 \
 	    -k $(KEY_CERT_PAIR) \
 	    $(SIGNED_TARGET_FILES_PACKAGE) $@
