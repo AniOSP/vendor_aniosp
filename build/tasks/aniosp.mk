@@ -34,7 +34,7 @@ $(OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(OTA_PACKAGE_TARGET)
 
 .PHONY: aniosp
-aniosp: brillo_update_payload checkvintf $(OTA_PACKAGE_TARGET)
+aniosp: otatools brillo_update_payload checkvintf $(OTA_PACKAGE_TARGET)
 
 ifeq ($(ANIOSP_BUILD_TYPE), OFFICIAL)
 
@@ -72,7 +72,7 @@ $(PROD_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(PROD_OTA_PACKAGE_TARGET)
 
 .PHONY: aniosp-prod
-aniosp-prod: brillo_update_payload checkvintf $(PROD_OTA_PACKAGE_TARGET)
+aniosp-prod: otatools brillo_update_payload checkvintf $(PROD_OTA_PACKAGE_TARGET)
 
 ifneq ($(PREVIOUS_TARGET_FILES_PACKAGE),)
 
@@ -96,7 +96,7 @@ $(INCREMENTAL_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(INCREMENTAL_OTA_PACKAGE_TARGET)
 
 .PHONY: incremental-ota
-incremental-ota: brillo_update_payload checkvintf $(INCREMENTAL_OTA_PACKAGE_TARGET)
+incremental-ota: otatools brillo_update_payload checkvintf $(INCREMENTAL_OTA_PACKAGE_TARGET)
 
 endif
 
