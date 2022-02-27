@@ -40,3 +40,6 @@ k=$(expr $i - 1)
 	repo forall -c '. $formatter_script' >> $Changelog
 	echo >> $Changelog;
 done
+
+# Copy the said changelog to OUT as TEMP, to be renamed by tasks
+cp $Changelog $out/
