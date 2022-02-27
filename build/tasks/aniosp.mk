@@ -34,7 +34,7 @@ $(OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(OTA_PACKAGE_TARGET)
 	@echo "Generating changelog for unsigned"
 	$(hide) ./vendor/aniosp/tools/changelog.sh
-	$(hide) mv $(PRODUCT_OUT)/Changelog.txt $(PRODUCT_OUT)/$(OTA_PACKAGE_TARGET).txt
+	$(hide) mv Changelog.txt $(OTA_PACKAGE_TARGET).txt
 
 .PHONY: aniosp
 aniosp: otatools brillo_update_payload checkvintf $(OTA_PACKAGE_TARGET)
@@ -75,7 +75,7 @@ $(PROD_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(PROD_OTA_PACKAGE_TARGET)
 	@echo "Generating changelog for production"
 	$(hide) ./vendor/aniosp/tools/changelog.sh
-	$(hide) mv $(PRODUCT_OUT)/Changelog.txt $(PRODUCT_OUT)/$(PROD_OTA_PACKAGE_TARGET).txt
+	$(hide) mv Changelog.txt $(PROD_OTA_PACKAGE_TARGET).txt
 
 .PHONY: aniosp-prod
 aniosp-prod: otatools brillo_update_payload checkvintf $(PROD_OTA_PACKAGE_TARGET)
