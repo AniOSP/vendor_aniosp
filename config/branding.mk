@@ -22,7 +22,7 @@ PRODUCT_GENERIC_PROPERTIES += \
     org.aniosp.build_date_utc=$(ANIOSP_BUILD_DATE_UTC) \
     org.aniosp.build_type=$(ANIOSP_BUILD_TYPE)
 
-$(call inherit-product-if-exists, vendor/aniosp/build/target/product/security/evolution_security.mk)
+$(call inherit-product-if-exists, vendor/aniosp/build/target/product/security/aniosp_security.mk)
 
 PRODUCT_HOST_PACKAGES += \
     sign_target_files_apks \
