@@ -1,13 +1,13 @@
 # Build fingerprint
 ifeq ($(BUILD_FINGERPRINT),)
-BUILD_NUMBER_CUSTOM := $(shell date -u +%H%M)
-CUSTOM_DEVICE ?= $(TARGET_DEVICE)
-ifneq ($(filter OFFICIAL,$(CUSTOM_BUILD_TYPE)),)
+BUILD_NUMBER_ANIOSP := $(shell date -u +%H%M)
+ANIOSP_DEVICE ?= $(TARGET_DEVICE)
+ifneq ($(filter OFFICIAL,$(ANIOSP_BUILD_TYPE)),)
 BUILD_SIGNATURE_KEYS := release-keys
 else
 BUILD_SIGNATURE_KEYS := test-keys
 endif
-BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(CUSTOM_DEVICE)/$(CUSTOM_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BUILD_NUMBER_CUSTOM):$(TARGET_BUILD_VARIANT)/$(BUILD_SIGNATURE_KEYS)
+BUILD_FINGERPRINT := $(PRODUCT_BRAND)/$(ANIOSP_DEVICE)/$(ANIOSP_DEVICE):$(PLATFORM_VERSION)/$(BUILD_ID)/$(BUILD_NUMBER_ANIOSP):$(TARGET_BUILD_VARIANT)/$(BUILD_SIGNATURE_KEYS)
 endif
 ADDITIONAL_SYSTEM_PROPERTIES  += \
     ro.build.fingerprint=$(BUILD_FINGERPRINT)
@@ -20,8 +20,8 @@ endif
 
 # Versioning props
 ADDITIONAL_SYSTEM_PROPERTIES  += \
-    org.pixelexperience.version=$(CUSTOM_VERSION_PROP) \
-    org.pixelexperience.version.display=$(CUSTOM_VERSION) \
-    org.pixelexperience.build_date=$(CUSTOM_BUILD_DATE) \
-    org.pixelexperience.build_date_utc=$(CUSTOM_BUILD_DATE_UTC) \
-    org.pixelexperience.build_type=$(CUSTOM_BUILD_TYPE)
+    org.aniosp.version=$(ANIOSP_VERSION_PROP) \
+    org.aniosp.version.display=$(ANIOSP_VERSION) \
+    org.aniosp.build_date=$(ANIOSP_BUILD_DATE) \
+    org.aniosp.build_date_utc=$(ANIOSP_BUILD_DATE_UTC) \
+    org.aniosp.build_type=$(ANIOSP_BUILD_TYPE)

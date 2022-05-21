@@ -42,11 +42,11 @@ except ImportError:
 
 DEBUG = False
 
-custom_local_manifest = ".repo/local_manifests/pixel.xml"
-custom_default_revision =  os.getenv('ROOMSERVICE_DEFAULT_BRANCH', 'twelve')
-custom_dependencies = "aosp.dependencies"
-org_manifest = "pixel-devices"  # leave empty if org is provided in manifest
-org_display = "PixelExperience-Devices"  # needed for displaying
+custom_local_manifest = ".repo/local_manifests/aniosp.xml"
+custom_default_revision =  os.getenv('ROOMSERVICE_DEFAULT_BRANCH', 'shizuku-12.1')
+custom_dependencies = "aniosp.dependencies"
+org_manifest = "aniosp-devices"  # leave empty if org is provided in manifest
+org_display = "AniOSP-Devices"  # needed for displaying
 
 github_auth = None
 
