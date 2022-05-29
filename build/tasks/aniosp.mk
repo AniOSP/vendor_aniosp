@@ -31,7 +31,7 @@ $(OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
 	    -p $(OUT_DIR)/host/linux-x86 \
 	    $(BUILT_TARGET_FILES_PACKAGE) $@
 
-	$(hide) $(MD5SUM) $(OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(OTA_PACKAGE_TARGET).md5sum
+	$(hide) $(SHA1SUM) $(OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(OTA_PACKAGE_TARGET).sha1sum
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(OTA_PACKAGE_TARGET)
 	@echo "Generating changelog for unsigned"
 	$(hide) ./vendor/aniosp/tools/changelog.sh
@@ -73,7 +73,7 @@ $(PROD_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
 	    -k $(KEY_CERT_PAIR) \
 	    $(SIGNED_TARGET_FILES_PACKAGE) $@
 
-	$(hide) $(MD5SUM) $(PROD_OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(PROD_OTA_PACKAGE_TARGET).md5sum
+	$(hide) $(SHA1SUM) $(PROD_OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(PROD_OTA_PACKAGE_TARGET).sha1sum
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(PROD_OTA_PACKAGE_TARGET)
 	@echo "Generating changelog for production"
 	$(hide) ./vendor/aniosp/tools/changelog.sh
@@ -112,7 +112,7 @@ $(INCREMENTAL_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
 	    -i $(PREVIOUS_TARGET_FILES_PACKAGE) \
 	    $(SIGNED_TARGET_FILES_PACKAGE) $@
 
-	$(hide) $(MD5SUM) $(INCREMENTAL_OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(INCREMENTAL_OTA_PACKAGE_TARGET).md5sum
+	$(hide) $(SHA1SUM) $(INCREMENTAL_OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(INCREMENTAL_OTA_PACKAGE_TARGET).sha1sum
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(INCREMENTAL_OTA_PACKAGE_TARGET)
 
 .PHONY: incremental-ota
@@ -138,7 +138,7 @@ $(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
 	    -i $(PREVIOUS_STABLE_TARGET_FILES_PACKAGE) \
 	    $(SIGNED_TARGET_FILES_PACKAGE) $@
 
-	$(hide) $(MD5SUM) $(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET).md5sum
+	$(hide) $(SHA1SUM) $(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET).sha1sum
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET)
 
 .PHONY: stable-ota
