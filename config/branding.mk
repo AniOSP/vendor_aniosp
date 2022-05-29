@@ -12,3 +12,25 @@ ANIOSP_PLATFORM_VERSION := 12.1
 
 ANIOSP_VERSION := AniOSP_$(ANIOSP_BUILD)-$(ANIOSP_PLATFORM_VERSION)-$(ANIOSP_BUILD_DATE)-$(ANIOSP_BUILD_TYPE)
 ANIOSP_VERSION_PROP := shizuku
+
+BUILD_ID_LC ?= $(shell echo $(BUILD_ID) | tr '[:upper:]' '[:lower:]')
+
+PRODUCT_GENERIC_PROPERTIES += \
+    org.aniosp.version=$(ANIOSP_VERSION_PROP) \
+    org.aniosp.version.display=$(ANIOSP_VERSION) \
+    org.aniosp.build_date=$(ANIOSP_BUILD_DATE) \
+    org.aniosp.build_date_utc=$(ANIOSP_BUILD_DATE_UTC) \
+    org.aniosp.build_type=$(ANIOSP_BUILD_TYPE)
+
+$(call inherit-product-if-exists, vendor/aniosp/build/target/product/security/evolution_security.mk)
+
+PRODUCT_HOST_PACKAGES += \
+    signapk \
+    avbtool \
+    brotli \
+    aapt2 \
+    deapexer \
+    debugfs \
+    zipalign \
+    apexer \
+    brillo_update_payload

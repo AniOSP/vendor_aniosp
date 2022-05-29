@@ -20,6 +20,15 @@ SHA256 := prebuilts/build-tools/path/$(HOST_PREBUILT_TAG)/sha256sum
 
 .PHONY: bacon
 bacon: $(INTERNAL_OTA_PACKAGE_TARGET)
-	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(ANIOSP_TARGET_PACKAGE)
-	$(hide) $(SHA256) $(ANIOSP_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(ANIOSP_TARGET_PACKAGE).sha256sum
-	@echo "Package Complete: $(ANIOSP_TARGET_PACKAGE)" >&2
+	$(hide) mv $(INTERNAL_OTA_PACKAGE_TARGET) $(ANIOSP_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(ANIOSP_TARGET_PACKAGE) | sed "s|$(PRODUCT_OUT)/||" > $(ANIOSP_TARGET_PACKAGE).md5sum
+	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(ANIOSP_TARGET_PACKAGE)
+
+	@echo "${cya}Building ${bldcya}AniOSP...! ${txtrst}";
+	@echo -e""
+	@echo -e ${CL_YLW}"Zip  :"${CL_YLW} $(ANIOSP_VERSION).zip${CL_YLW}
+	@echo -e ${CL_YLW}"MD5  :"${CL_YLW}" `cat $(ANIOSP_TARGET_PACKAGE).md5sum | awk '{print $$1}' `"${CL_YLW}
+	@echo -e ${CL_YLW}"Size :"${CL_YLW}" `du -sh $(ANIOSP_TARGET_PACKAGE) | awk '{print $$1}' `"${CL_YLW}
+	@echo -e ${CL_YLW}"ID   :"${CL_YLW}" `sha256sum $(ANIOSP_TARGET_PACKAGE) | cut -d ' ' -f 1`"${CL_YLW}
+	@echo -e ${CL_YLW}"Path :"${CL_YLW}" $(ANIOSP_TARGET_PACKAGE)"${CL_YLW}
+	@echo -e ${CL_GRN}"***********************************************************"${CL_GRN}
