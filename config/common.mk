@@ -209,7 +209,7 @@ $(call inherit-product, vendor/aniosp/config/bootanimation.mk)
 $(call inherit-product, vendor/aniosp/config/fonts.mk)
 
 # GApps
-#$(call inherit-product, vendor/gapps/config.mk)
+$(call inherit-product, vendor/gapps/config.mk)
 
 # OTA
 $(call inherit-product, vendor/aniosp/config/ota.mk)
