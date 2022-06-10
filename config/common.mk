@@ -210,6 +210,9 @@ $(call inherit-product, vendor/aniosp/config/common_telephony.mk)
 # GApps
 $(call inherit-product, vendor/gapps/config.mk)
 
+# Enable updating of APEXes
+$(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
+
 # Inherit from apex config
 ifeq ($(TARGET_FLATTEN_APEX),false)
 $(call inherit-product, vendor/aniosp/config/apex.mk)
