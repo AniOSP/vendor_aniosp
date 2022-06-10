@@ -22,9 +22,8 @@ OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(ANIOSP_VERSION)-unsigned.zip
 
 $(OTA_PACKAGE_TARGET): $(BRO)
 
-$(OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) \
-		build/tools/releasetools/ota_from_target_files
-	@echo "aniosp: $@"
+$(OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) build/tools/releasetools/ota_from_target_files
+	@echo "AniOSP: $@"
 	    $(OTA_FROM_TARGET_FILES) --verbose \
 	    --block \
 	    --backup=true \
@@ -42,11 +41,10 @@ aniosp: otatools brillo_update_payload checkvintf $(OTA_PACKAGE_TARGET)
 
 ifeq ($(ANIOSP_BUILD_TYPE), OFFICIAL)
 
-SIGNED_TARGET_FILES_PACKAGE := $(PRODUCT_OUT)/$(TARGET_DEVICE)-target_files-$(BUILD_ID_LC).zip
+SIGNED_TARGET_FILES_PACKAGE := $(PRODUCT_OUT)/$(TARGET_DEVICE)-target_files-$(BUILD_ID).zip
 SIGN_FROM_TARGET_FILES := $(HOST_OUT_EXECUTABLES)/sign_target_files_apks$(HOST_EXECUTABLE_SUFFIX)
 
-$(SIGNED_TARGET_FILES_PACKAGE): $(BUILT_TARGET_FILES_PACKAGE) \
-		build/tools/releasetools/sign_target_files_apks
+$(SIGNED_TARGET_FILES_PACKAGE): $(BUILT_TARGET_FILES_PACKAGE) build/tools/releasetools/sign_target_files_apks
 	@echo "Package signed target files: $@"
 	    $(SIGN_FROM_TARGET_FILES) --verbose \
 	    -o \
@@ -63,9 +61,8 @@ $(PROD_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(PROD_CERTS)/releasekey
 
 $(PROD_OTA_PACKAGE_TARGET): $(BRO)
 
-$(PROD_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
-		build/tools/releasetools/ota_from_target_files
-	@echo "aniosp production: $@"
+$(PROD_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) build/tools/releasetools/ota_from_target_files
+	@echo "AniOSP Production: $@"
 	    $(OTA_FROM_TARGET_FILES) --verbose \
 	    --block \
 	    --backup=true \
@@ -93,57 +90,5 @@ $(GEN_CHANGELOG):
 
 .PHONY: gen-changelog
 gen-changelog: $(GEN_CHANGELOG)
-
-ifneq ($(PREVIOUS_TARGET_FILES_PACKAGE),)
-
-INCREMENTAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/incremental-$(ANIOSP_VERSION).zip
-
-$(INCREMENTAL_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(PROD_CERTS)/releasekey
-
-$(INCREMENTAL_OTA_PACKAGE_TARGET): $(BRO)
-
-$(INCREMENTAL_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
-		build/tools/releasetools/ota_from_target_files
-	@echo "aniosp incremental production: $@"
-	    $(OTA_FROM_TARGET_FILES) --verbose \
-	    --block \
-	    -p $(OUT_DIR)/host/linux-x86 \
-	    -k $(KEY_CERT_PAIR) \
-	    -i $(PREVIOUS_TARGET_FILES_PACKAGE) \
-	    $(SIGNED_TARGET_FILES_PACKAGE) $@
-
-	$(hide) $(SHA1SUM) $(INCREMENTAL_OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(INCREMENTAL_OTA_PACKAGE_TARGET).sha1sum
-	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(INCREMENTAL_OTA_PACKAGE_TARGET)
-
-.PHONY: incremental-ota
-incremental-ota: otatools brillo_update_payload checkvintf $(INCREMENTAL_OTA_PACKAGE_TARGET)
-
-endif
-
-ifneq ($(PREVIOUS_STABLE_TARGET_FILES_PACKAGE),)
-
-INCREMENTAL_STABLE_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(EVO_DELTA_VERSION).zip
-
-$(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(PROD_CERTS)/releasekey
-
-$(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET): $(BRO)
-
-$(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) \
-		build/tools/releasetools/ota_from_target_files
-	@echo "aniosp stable incremental production: $@"
-	    $(OTA_FROM_TARGET_FILES) --verbose \
-	    --block \
-	    -p $(OUT_DIR)/host/linux-x86 \
-	    -k $(KEY_CERT_PAIR) \
-	    -i $(PREVIOUS_STABLE_TARGET_FILES_PACKAGE) \
-	    $(SIGNED_TARGET_FILES_PACKAGE) $@
-
-	$(hide) $(SHA1SUM) $(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET).sha1sum
-	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET)
-
-.PHONY: stable-ota
-stable-ota: brillo_update_payload checkvintf $(INCREMENTAL_STABLE_OTA_PACKAGE_TARGET)
-
-endif
 
 endif
