@@ -30,7 +30,7 @@ $(OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) build/tools/releasetools/ot
 	    -p $(OUT_DIR)/host/linux-x86 \
 	    $(BUILT_TARGET_FILES_PACKAGE) $@
 
-	$(hide) $(SHA1SUM) $(OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(OTA_PACKAGE_TARGET).sha1sum
+	$(hide) $(MD5SUM) $(OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(OTA_PACKAGE_TARGET).md5sum
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(OTA_PACKAGE_TARGET)
 	@echo "Generating changelog for unsigned"
 	$(hide) ./vendor/aniosp/tools/changelog.sh
@@ -70,7 +70,7 @@ $(PROD_OTA_PACKAGE_TARGET): $(SIGNED_TARGET_FILES_PACKAGE) build/tools/releaseto
 	    -k $(KEY_CERT_PAIR) \
 	    $(SIGNED_TARGET_FILES_PACKAGE) $@
 
-	$(hide) $(SHA1SUM) $(PROD_OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(PROD_OTA_PACKAGE_TARGET).sha1sum
+	$(hide) $(MD5SUM) $(PROD_OTA_PACKAGE_TARGET) | sed "s|$(PRODUCT_OUT)/||" > $(PROD_OTA_PACKAGE_TARGET).md5sum
 	$(hide) ./vendor/aniosp/tools/generate_json_build_info.sh $(PROD_OTA_PACKAGE_TARGET)
 	@echo "Generating changelog for production"
 	$(hide) ./vendor/aniosp/tools/changelog.sh
