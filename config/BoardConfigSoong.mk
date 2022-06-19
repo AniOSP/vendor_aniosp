@@ -41,7 +41,7 @@ SOONG_CONFIG_customGlobalVars += \
     target_surfaceflinger_udfps_lib \
     target_uses_prebuilt_dynamic_partitions \
     uses_camera_parameter_lib \
-    uses_legacy_fd_fbdev
+    uses_legacy_fd_fbdev \
     uses_camera_parameter_lib \
     uses_egl_display_array
 
