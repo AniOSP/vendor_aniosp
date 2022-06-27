@@ -1,4 +1,4 @@
-# Pixel 3 XL
+# Pixel 3
 
 # Usage: ${firmware_partitions[@]}
 readonly firmware_partitions=(
@@ -18,7 +18,7 @@ readonly firmware_partitions=(
 
 # Usage: ${device_repos[@]}
 device_repos=(
-  device/google/crosshatch
+  # common repos in crosshatch
 )
 
 # Updated manually
@@ -34,12 +34,12 @@ readonly aosp_tag="android-12.0.0_r34"
 readonly prev_build_number="8029091"
 readonly build_number="8618562"
 
-readonly image_url="https://dl.google.com/dl/android/aosp/crosshatch-sp1a.210812.016.c2-factory-27f59137.zip"
-readonly image_sha256="27f59137f9802f6913f92d820bb0cbd80793f6e4a80c5f05e1242810903d4aea"
+readonly image_url="https://dl.google.com/dl/android/aosp/blueline-sp1a.210812.016.c2-factory-fa981d87.zip"
+readonly image_sha256="fa981d87b6b28a1996161accbb147f46fe29663bb2ce6cc13dc9e500cbc59c93"
 
-readonly flash_url="https://flash.android.com/build/8618562?target=crosshatch-user&signed"
+readonly flash_url="https://flash.android.com/build/8618562?target=blueline-user&signed"
 
-readonly ota_url="https://dl.google.com/dl/android/aosp/crosshatch-ota-sp1a.210812.016.c2-efea980d.zip"
-readonly ota_sha256="efea980d6359363b645435a5d077228d9a00d6f9772bf6adf16e26090dba0d53"
+readonly ota_url="https://dl.google.com/dl/android/aosp/blueline-ota-sp1a.210812.016.c2-f7ebc6b3.zip"
+readonly ota_sha256="f7ebc6b326be1b40355d1e0b6d5e5e73204878f3419dec954eb35e1677bb12a1"
 
 readonly security_patch="2021-10-05"
