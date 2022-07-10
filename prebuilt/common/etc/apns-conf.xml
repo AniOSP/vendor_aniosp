@@ -3160,6 +3160,11 @@
   <apn carrier="CBNET" mcc="460" mnc="15" apn="cbnet" type="default,supl" protocol="IPV4V6" roaming_protocol="IPV4V6" />
   <apn carrier="IA" mcc="460" mnc="15" apn="" type="ia" protocol="IPV4V6" roaming_protocol="IPV4V6" />
   <apn carrier="IMS" mcc="460" mnc="15" apn="ims" type="ims" protocol="IPV4V6" roaming_protocol="IPV4V6" />
+  <apn carrier="中国广电 (CBN) GPRS" mcc="460" mnc="13" apn="cmnet" type="default,supl" />
+  <apn carrier="中国广电彩信 (CBN)" mcc="460" mnc="13" apn="cmwap" mmsc="http://mmsc.monternet.com" mmsport="80" mmsproxy="10.0.0.172" port="80" proxy="10.0.0.172" type="mms" />
+  <apn carrier="中国广电 (CBN) IMS" mcc="460" mnc="13" apn="ims" type="ims" protocol="IPV4V6" />
+  <apn carrier="中国广电 (CBN) GPRS" mcc="460" mnc="15" apn="cbnet" type="default,supl" />
+  <apn carrier="中国广电 (CBN) IMS" mcc="460" mnc="15" apn="ims" type="ims" protocol="IPV4V6" />
   <apn carrier="CMCC Internet" mcc="460" mnc="20" apn="cmnet" type="default,supl" protocol="IPV4V6" roaming_protocol="IPV4V6" />
   <apn carrier="CMCC HTTP" mcc="460" mnc="20" apn="cmwap" type="default" proxy="10.0.0.172" port="80" user="wap" password="wap" protocol="IPV4V6" roaming_protocol="IPV4V6" />
   <apn carrier="CMCC MMS" mcc="460" mnc="20" apn="cmwap" type="mms" proxy="10.0.0.172" port="80" mmsc="http://mmsc.monternet.com" protocol="IPV4V6" roaming_protocol="IPV4V6" />
