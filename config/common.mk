@@ -126,7 +126,8 @@ PRODUCT_DEXPREOPT_SPEED_APPS += \
 
 # SystemUI plugins
 PRODUCT_PACKAGES += \
-    QuickAccessWallet
+    QuickAccessWallet \
+    NetworkStackOverlay
 
 # Gboard configuration
 PRODUCT_PRODUCT_PROPERTIES += \
