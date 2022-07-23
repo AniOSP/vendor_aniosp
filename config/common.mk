@@ -196,6 +196,14 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.biometrics.face.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/android.hardware.biometrics.face.xml
 endif
 
+# Include extra packages
+PRODUCT_PACKAGES += \
+    F-Droid \
+    F-DroidPrivilegedExtension \
+    vim \
+    htop \
+    libncurses
+
 # Audio
 $(call inherit-product, vendor/aniosp/config/audio.mk)
 
