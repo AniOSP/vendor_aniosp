@@ -211,7 +211,8 @@ PRODUCT_PACKAGES += \
     F-DroidPrivilegedExtension \
     vim \
     htop \
-    libncurses
+    libncurses \
+    RepainterServicePriv \
 
 # Audio
 $(call inherit-product, vendor/aniosp/config/audio.mk)
