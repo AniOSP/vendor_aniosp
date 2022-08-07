@@ -241,4 +241,7 @@ $(call inherit-product, vendor/aniosp/config/ota.mk)
 # RRO Overlays
 $(call inherit-product, vendor/aniosp/config/rro_overlays.mk)
 
+# Lawnchair
+$(call inherit-product, vendor/lawnchair/lawnchair.mk)
+
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
