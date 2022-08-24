@@ -6,7 +6,7 @@ Additional functions:
 - mmap:            Builds all of the modules in the current directory and its dependencies, then pushes the package to the device.
 - mmmp:            Builds all of the modules in the supplied directories and pushes them to the device.
 - aospremote:      Add git remote for matching AOSP repository.
-- cafremote:       Add git remote for matching CodeLinaro repository.
+- cloremote:       Add git remote for matching CodeLinaro repository.
 - githubremote:    Add git remote for AniOSP Github.
 - mka:             Builds using SCHED_BATCH on all processors.
 - mkap:            Builds the module(s) using mka and pushes them to the device.
@@ -228,52 +228,36 @@ function dddclient()
    fi
 }
 
-function aospremote()
+function cloremote()
 {
     if ! git rev-parse --git-dir &> /dev/null
     then
         echo ".git directory not found. Please run this from the root directory of the Android repository you wish to set up."
         return 1
     fi
-    git remote rm aosp 2> /dev/null
-    local PROJECT=$(pwd -P | sed -e "s#$ANDROID_BUILD_TOP\/##; s#-caf.*##; s#\/default##")
-    # Google moved the repo location in Oreo
-    if [ $PROJECT = "build/make" ]
-    then
-        PROJECT="build"
-    fi
-    if (echo $PROJECT | grep -qv "^device")
-    then
-        local PFX="platform/"
-    fi
-    git remote add aosp https://android.googlesource.com/$PFX$PROJECT
-    echo "Remote 'aosp' created"
-}
+    git remote rm clo 2> /dev/null
 
-function cafremote()
-{
-    if ! git rev-parse --git-dir &> /dev/null
-    then
-        echo ".git directory not found. Please run this from the root directory of the Android repository you wish to set up."
-        return 1
+    if [ -f ".gitupstream" ]; then
+        local REMOTE=$(cat .gitupstream | cut -d ' ' -f 1)
+        git remote add clo ${REMOTE}
+    else
+        local PROJECT=$(pwd -P | sed -e "s#$ANDROID_BUILD_TOP\/##; s#-caf.*##; s#\/default##")
+        # Google moved the repo location in Oreo
+        if [ $PROJECT = "build/make" ]
+        then
+            PROJECT="build"
+        fi
+        if [[ $PROJECT =~ "qcom/opensource" ]];
+        then
+            PROJECT=$(echo $PROJECT | sed -e "s#qcom\/opensource#qcom-opensource#")
+        fi
+        if (echo $PROJECT | grep -qv "^device")
+        then
+            local PFX="platform/"
+        fi
+        git remote add clo https://git.codelinaro.org/clo/la/$PFX$PROJECT
     fi
-    git remote rm caf 2> /dev/null
-    local PROJECT=$(pwd -P | sed -e "s#$ANDROID_BUILD_TOP\/##; s#-caf.*##; s#\/default##")
-     # Google moved the repo location in Oreo
-    if [ $PROJECT = "build/make" ]
-    then
-        PROJECT="build"
-    fi
-    if [[ $PROJECT =~ "qcom/opensource" ]];
-    then
-        PROJECT=$(echo $PROJECT | sed -e "s#qcom\/opensource#qcom-opensource#")
-    fi
-    if (echo $PROJECT | grep -qv "^device")
-    then
-        local PFX="platform/"
-    fi
-    git remote add caf https://git.codelinaro.org/clo/la/$PFX$PROJECT
-    echo "Remote 'caf' created"
+    echo "Remote 'clo' created"
 }
 
 function githubremote()
@@ -284,7 +268,12 @@ function githubremote()
         return 1
     fi
     git remote rm github 2> /dev/null
-    local REMOTE=$(git config --get remote.aniosp.projectname)
+    local REMOTE=$(git config --get remote.aosp.projectname)
+
+    if [ -z "$REMOTE" ]
+    then
+        REMOTE=$(git config --get remote.clo.projectname)
+    fi
 
     local PROJECT=$(echo $REMOTE | sed -e "s#platform/#android/#g; s#/#_#g")
 
