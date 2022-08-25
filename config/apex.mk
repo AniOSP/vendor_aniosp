@@ -25,6 +25,7 @@ PRODUCT_MAINLINE_SEPOLICY_DEV_CERTIFICATES := vendor/aniosp/apex/NetworkStack
 # Prebuilt module SDKs require prebuilt modules to work, and currently
 # prebuilt modules are only provided for com.google.android.xxx.
 MODULE_BUILD_FROM_SOURCE := false
+DISABLE_DEXPREOPT_CHECK := true
 
 # Enable Google Play system updates support
 PRODUCT_SOONG_NAMESPACES += \
@@ -37,8 +38,10 @@ PRODUCT_PACKAGES += \
 # Google Apexes
 PRODUCT_PACKAGES += \
     com.google.android.adbd \
+    com.google.android.adservices \
     com.google.android.appsearch \
     com.google.android.art \
+    com.google.android.bluetooth \
     com.google.android.cellbroadcast \
     com.google.android.conscrypt \
     com.google.android.extservices \
@@ -47,13 +50,14 @@ PRODUCT_PACKAGES += \
     com.google.android.media.swcodec \
     com.google.android.mediaprovider \
     com.google.android.neuralnetworks \
+    com.google.android.ondevicepersonalization \
     com.google.android.os.statsd \
     com.google.android.resolv \
     com.google.android.scheduling \
     com.google.android.sdkext \
-    com.google.android.telephony \
     com.google.android.tethering \
-    com.google.android.tzdata3 \
+    com.google.android.tzdata4 \
+    com.google.android.uwb \
     com.google.android.wifi \
     com.google.mainline.primary.libs
 
