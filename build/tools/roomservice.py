@@ -43,7 +43,7 @@ except ImportError:
 DEBUG = False
 
 aniosp_local_manifest = ".repo/local_manifests/aniosp.xml"
-aniosp_default_revision =  os.getenv('ROOMSERVICE_DEFAULT_BRANCH', 'aiko-13.0')
+aniosp_default_revision =  os.getenv('ROOMSERVICE_DEFAULT_BRANCH', 'aiko-13')
 aniosp_dependencies = "aniosp.dependencies"
 org_manifest = "aniosp-devices"  # leave empty if org is provided in manifest
 org_display = "AniOSP-Devices"  # needed for displaying
